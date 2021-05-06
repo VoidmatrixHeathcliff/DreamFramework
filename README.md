@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/VoidmatrixHeathcliff/Dream.svg?style=flat&label=license&message=notspecified&labelColor=3f48cc)](https://github.com/VoidmatrixHeathcliff/Dream/blob/main/LICENSE)
 [![Commit activity](https://img.shields.io/github/contributors/VoidmatrixHeathcliff/Dream)](https://github.com/VoidmatrixHeathcliff/EtherEngine/graphs/contributors)
 ![](https://img.shields.io/github/commit-activity/m/VoidmatrixHeathcliff/Dream)
-![](https://jwenjian-visitor-badge-5.glitch.me/badge?page_id=VoidmatrixHeathcliff.Dream.readme)
+![Visitors](https://jwenjian-visitor-badge-5.glitch.me/badge?page_id=VoidmatrixHeathcliff.Dream.readme)
 
 ![DreamFramework](docs/img/title.jpg)
 
