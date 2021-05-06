@@ -1,7 +1,7 @@
 # DreamFramework - 高效强大的 Lua 视觉小说游戏框架
 [![Stars](https://img.shields.io/github/stars/VoidmatrixHeathcliff/Dream.svg?style=flat&labelColor=e49e61)](https://github.com/VoidmatrixHeathcliff/Dream/stargazers)
 [![Forks](https://img.shields.io/github/forks/VoidmatrixHeathcliff/Dream.svg?style=flat&labelColor=e49e61)](https://github.com/VoidmatrixHeathcliff/Dream/network/members)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4ea86ccd083d491c8313c7fbffbc7f7d)](https://www.codacy.com/gh/VoidmatrixHeathcliff/Dream/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VoidmatrixHeathcliff/Dream&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4ea86ccd083d491c8313c7fbffbc7f7d)](https://www.codacy.com/gh/VoidmatrixHeathcliff/DreamFramework/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VoidmatrixHeathcliff/DreamFramework&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/github/license/VoidmatrixHeathcliff/Dream.svg?style=flat&label=license&message=notspecified&labelColor=3f48cc)](https://github.com/VoidmatrixHeathcliff/Dream/blob/main/LICENSE)
 [![Commit activity](https://img.shields.io/github/contributors/VoidmatrixHeathcliff/Dream)](https://github.com/VoidmatrixHeathcliff/EtherEngine/graphs/contributors)
 ![](https://img.shields.io/github/commit-activity/m/VoidmatrixHeathcliff/Dream)
