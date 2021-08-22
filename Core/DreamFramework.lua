@@ -17,6 +17,8 @@ Window.CreateWindow(
     {Window.WINDOW_FULLSCREEN_DESKTOP}
 )
 
+Graphic.SetCursorShow(false)
+
 local _FPS_ <const> = 60
 local _COLOR_ <const> = {
     BLACK = {r = 0, g = 0, b = 0, a = 255},
