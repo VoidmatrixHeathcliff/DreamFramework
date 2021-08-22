@@ -70,5 +70,3 @@ while not isQuit do
     Window.UpdateWindow()
     Time.DynamicSleep(1000 / _FPS_, Time.GetInitTime() - _timeFrameStart)
 end
-
-os.execute("pause")
