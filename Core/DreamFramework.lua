@@ -13,7 +13,8 @@ Window.CreateWindow(
         w = 1280,
         h = 720
     },
-    {Window.WINDOW_RESIZABLE}
+    -- {}
+    {Window.WINDOW_FULLSCREEN_DESKTOP}
 )
 
 local _FPS_ <const> = 60
@@ -25,12 +26,20 @@ local _COLOR_ <const> = {
     BLUE = {r = 0, g = 0, b = 255, a = 255},
 }
 
-isQuit = false
+isFullScreen = false
 
 mapEventHandler = {
     [Interactivity.EVENT_QUIT] = function()
         isQuit = true
     end,
+    [Interactivity.EVENT_KEYUP_F11] = function()
+        isFullScreen = not isFullScreen
+        if isFullScreen then
+            Window.SetWindowMode(Window.WINDOW_MODE_FULLSCREEN_DESKTOP)
+        else
+            Window.SetWindowMode(Window.WINDOW_MODE_WINDOWED)
+        end
+    end
 }
 
 setmetatable(mapEventHandler, {
@@ -39,15 +48,20 @@ setmetatable(mapEventHandler, {
     end,
 })
 
+-- 当场景的 Update 函数返回 false 时表示当前场景结束
 local function DrawCall()
-    SplashScreen.Update()
+    if not SplashScreen.Update() then
+        isQuit = true
+    end
 end
 
 SplashScreen.Init()
 
+isQuit = false
+
 while not isQuit do
     local _timeFrameStart = Time.GetInitTime()
-    Graphic.SetDrawColor(_COLOR_.WHITE)
+    Graphic.SetDrawColor(_COLOR_.BLACK)
     Window.ClearWindow()
     while Interactivity.UpdateEvent() do
         mapEventHandler[Interactivity.GetEventType()]()
@@ -56,3 +70,5 @@ while not isQuit do
     Window.UpdateWindow()
     Time.DynamicSleep(1000 / _FPS_, Time.GetInitTime() - _timeFrameStart)
 end
+
+os.execute("pause")

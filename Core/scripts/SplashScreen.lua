@@ -1,5 +1,6 @@
 Window = UsingModule("Window")
 Graphic = UsingModule("Graphic")
+Time = UsingModule("Time")
 Algorithm = UsingModule("Algorithm")
 
 local _module = {}
@@ -12,13 +13,108 @@ local _widthImageLogo, _heightImageLogo = _imageLogo:GetSize()
 local _widthImageTitle, _heightImagTitle = _imageTitle:GetSize()
 local _widthImageNote, _heightImageNote = _imageNote:GetSize()
 
-local _textureLogo, _textureTitle, _textureNote = nil, nil, nil
+local _textureLogo, _textureTitle, _textureNote
 
-local _rectLogo = {x = 0, y = 0, w = _widthImageLogo * 0.8, h = _heightImageLogo * 0.8}
-local _rectTitle = {x = 0, y = 0, w = _widthImageTitle * 0.9, h = _heightImagTitle * 0.9}
-local _rectNote = {x = 0, y = 0, w = _widthImageNote, h = _heightImageNote}
+local _rectWindowContent = {x = 0, y = 0, w = 0, h = 0}
+local _rectLogo = {x = 0, y = 0, w = _widthImageLogo, h = _heightImageLogo}
+local _rectTitle = {x = 0, y = 0, w = _widthImageTitle, h = _heightImagTitle}
+local _rectNote = {x = 0, y = 0, w = _widthImageNote, h = 0}
+-- PoweredBy 信息裁剪矩形
+local _rectNoteCut = {x = 0, y = _heightImageNote, w = _widthImageNote, h = _heightImageNote}
 
-local _colorBackground = {r = 235, g = 235, b = 235, a = 255}
+local _colorBackground = {r = 245, g = 245, b = 245, a = 255}
+local _colorMask = {r = 25, g = 25, b = 25, a = 255}
+
+-- 动画状态机
+local _stateMachineAnimation = {
+    -- 场景淡入
+    {
+        isInitialized = false,
+        isPlayOver = false,
+        timeStart = 0,
+        Play = function(self)
+            _colorMask.a = Algorithm.Clamp(
+                _colorMask.a - (Time.GetInitTime() - self.timeStart) / 300,
+                0,
+                255
+            )
+            if _colorMask.a == 0 then
+                self.isPlayOver = true
+            end
+        end
+    },
+    -- PoweredBy 信息切入
+    {
+        isInitialized = false,
+        isPlayOver = false,
+        timeStart = 0,
+        Play = function(self)
+            _rectNoteCut.y = Algorithm.Clamp(
+                _rectNoteCut.y - (Time.GetInitTime() - self.timeStart) / 750,
+                0,
+                _heightImageNote
+            )
+            _rectNote.h = _heightImageNote - _rectNoteCut.y
+            if _rectNoteCut.y == 0 then
+                self.isPlayOver = true
+            end
+        end
+    },
+    -- 场景保持
+    {
+        isInitialized = false,
+        isPlayOver = false,
+        timeStart = 0,
+        Play = function(self)
+            if Time.GetInitTime() - self.timeStart >= 850 then
+                self.isPlayOver = true
+            end
+        end
+    },
+    -- 场景淡出
+    {
+        isInitialized = false,
+        isPlayOver = false,
+        timeStart = 0,
+        Play = function(self)
+            _colorMask.a = Algorithm.Clamp(_colorMask.a + (Time.GetInitTime() - self.timeStart) / 300, 0, 255)
+            if _colorMask.a == 255 then
+                self.isPlayOver = true
+            end
+        end
+    },
+}
+
+-- 动画状态机中当前状态索引
+local _indexSMA = 1
+
+-- 计算渲染相关内容
+local function _CalculateRender()
+    _rectWindowContent.w, _rectWindowContent.h = Window.GetWindowDrawableSize()
+    local _scalingWidth = _rectWindowContent.w / 1920
+    _rectLogo.w = _widthImageLogo * _scalingWidth
+    _rectLogo.h = _heightImageLogo * _scalingWidth
+    _rectTitle.w = _widthImageTitle * _scalingWidth
+    _rectTitle.h = _heightImagTitle * _scalingWidth
+    _rectLogo.x = (980 - (_widthImageLogo + _widthImageTitle + 100) / 2) * _scalingWidth
+    _rectLogo.y = _rectWindowContent.h / 2 - _rectLogo.h / 2
+    _rectTitle.x = _rectLogo.x + (_widthImageLogo + 100) * _scalingWidth
+    _rectTitle.y = _rectWindowContent.h / 2 - _rectTitle.h / 2
+    _rectNote.x = _rectWindowContent.w / 2 - _rectNote.w / 2
+    _rectNote.y = _rectWindowContent.h - _rectNote.h - 15
+    if _indexSMA <= #_stateMachineAnimation then
+        local _state = _stateMachineAnimation[_indexSMA]
+        if not _state.isInitialized then
+            _state.timeStart = Time.GetInitTime()
+            _state.isInitialized = true
+        end
+        if not _state.isPlayOver then
+            _state:Play()
+        else
+            _indexSMA = _indexSMA + 1
+        end
+    end
+end
 
 _module.Init = function()
     _textureLogo = Graphic.CreateTexture(_imageLogo)
@@ -28,17 +124,15 @@ end
 
 _module.Update = function()
     Graphic.SetDrawColor(_colorBackground)
-    Window.ClearWindow()
-    local _widthWindow, _heightWindow = Window.GetWindowSize()
-    _rectLogo.x = _widthWindow / 2 - (_rectLogo.w + _rectTitle.w + 100) / 2
-    _rectLogo.y = _heightWindow / 2 - _rectLogo.h / 2
-    _rectTitle.x = _rectLogo.x + _rectLogo.w + 50
-    _rectTitle.y = _heightWindow / 2 - _rectTitle.h / 2
-    _rectNote.x = _widthWindow / 2 - _rectNote.w / 2
-    _rectNote.y = _heightWindow - _rectNote.h - 15
+    Graphic.DrawFillRectangle(_rectWindowContent)
+    _CalculateRender()
     Graphic.CopyTexture(_textureLogo, _rectLogo)
     Graphic.CopyTexture(_textureTitle, _rectTitle)
-    Graphic.CopyTexture(_textureNote, _rectNote)
+    Graphic.CopyReshapeTexture(_textureNote, _rectNoteCut, _rectNote)
+    Graphic.SetDrawColor(_colorMask)
+    Graphic.DrawFillRectangle(_rectWindowContent)
+    -- 返回当前场景是否没有播放完毕，即动画状态机索引是否没有到达状态机尾部
+    return _indexSMA <= #_stateMachineAnimation
 end
 
 return _module
