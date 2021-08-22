@@ -1,0 +1,14 @@
+{
+    "entry": "DreamFramework.lua",
+    "package": {
+        "path": [
+           "scripts/?.lua"
+        ],
+        "cpath": [
+
+        ]
+    },
+    "command": [
+        
+    ]
+}
