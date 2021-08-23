@@ -107,7 +107,7 @@ local function _CalculateRender()
     _rectLogo.h = _heightImageLogo * _scaling
     _rectTitle.w = _widthImageTitle * _scaling
     _rectTitle.h = _heightImagTitle * _scaling
-    _rectLogo.x = 980 * _scaling - (_rectLogo.w + _rectTitle.w + 100 * _scaling) / 2
+    _rectLogo.x = 1920 / 2 * _scaling - (_rectLogo.w + _rectTitle.w + 100 * _scaling) / 2
     _rectLogo.y = _rectWindowContent.h / 2 - _rectLogo.h / 2
     _rectTitle.x = _rectLogo.x + _rectLogo.w + 100 * _scaling
     _rectTitle.y = _rectWindowContent.h / 2 - _rectTitle.h / 2
