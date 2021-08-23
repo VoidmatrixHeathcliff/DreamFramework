@@ -50,7 +50,6 @@ local _stateMachineAnimation = {
             if _colorMask.a == 0 then
                 self.isPlayOver = true
             end
-            print("fading in...")
         end
     },
     -- 场景保持
@@ -62,7 +61,6 @@ local _stateMachineAnimation = {
             if Time.GetInitTime() - self.timeStart >= _splashList[_indexSplash].Delay then
                 self.isPlayOver = true
             end
-            print("keep...")
         end
     },
     -- 场景淡出
@@ -79,7 +77,6 @@ local _stateMachineAnimation = {
             if _colorMask.a == 255 then
                 self.isPlayOver = true
             end
-            print("fading out...")
         end
     },
 }
@@ -140,8 +137,6 @@ _module.Update = function()
     -- 如果纹理不为 nil 且尚未播放完全部 Splash 则渲染当前场景
     -- 纹理为 nil 仅发生在开发者没有定义任何 Splash 的情况下
     if _textureSplashImage and _indexSplash <= #_splashList then
-        print("_splashList[_indexSplash]", _splashList[_indexSplash])
-        print(_indexSplash)
         Graphic.SetDrawColor(_colorBackground[_splashList[_indexSplash].Background])
         Graphic.DrawFillRectangle(_rectWindowContent)
         Graphic.CopyTexture(_textureSplashImage, _rectSplashImage)
