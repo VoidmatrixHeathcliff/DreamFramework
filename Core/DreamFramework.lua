@@ -1,4 +1,4 @@
-SplashScreen = UsingModule("SplashScreen")
+GlobalSettings = require("GlobalSettings")
 
 Window = UsingModule("Window")
 Graphic = UsingModule("Graphic")
@@ -13,23 +13,31 @@ Window.CreateWindow(
         w = 1280,
         h = 720
     },
-    -- {}
-    {Window.WINDOW_FULLSCREEN_DESKTOP}
+    {}
+    -- {Window.WINDOW_FULLSCREEN_DESKTOP}
 )
 
 Graphic.SetCursorShow(false)
 
-local _FPS_ <const> = 60
-local _COLOR_ <const> = {
-    BLACK = {r = 0, g = 0, b = 0, a = 255},
-    WHITE = {r = 255, g = 255, b = 255, a = 255},
-    RED = {r = 255, g = 0, b = 0, a = 255},
-    GREEN = {r = 0, g = 255, b = 0, a = 255},
-    BLUE = {r = 0, g = 0, b = 255, a = 255},
+-- 场景列表
+sceneList = {
+    {
+        name = "Scene.SplashScreen",
+        module = nil,
+        isInitialized = false,
+        isForcedUnload = true
+    },
+    {
+        name = "Scene.CustomSplashScreen",
+        module = nil,
+        isInitialized = false,
+        isForcedUnload = true
+    },
 }
 
 isFullScreen = false
 
+-- 事件处理函数映射表
 mapEventHandler = {
     [Interactivity.EVENT_QUIT] = function()
         isQuit = true
@@ -44,31 +52,52 @@ mapEventHandler = {
     end
 }
 
+-- 设置映射表的 __index 元方法为空函数，防止未定义的事件触发
 setmetatable(mapEventHandler, {
     __index = function(tb, key)
         return function() end
     end,
 })
 
--- 当场景的 Update 函数返回 false 时表示当前场景结束
-local function DrawCall()
-    if not SplashScreen.Update() then
-        isQuit = true
-    end
-end
-
-SplashScreen.Init()
+-- 当前场景索引
+indexScene = 1
 
 isQuit = false
 
 while not isQuit do
     local _timeFrameStart = Time.GetInitTime()
-    Graphic.SetDrawColor(_COLOR_.BLACK)
+    Graphic.SetDrawColor(GlobalSettings._COLOR_.BLACK)
     Window.ClearWindow()
+    -- 事件处理：调用事件映射表中对应的回调函数
     while Interactivity.UpdateEvent() do
         mapEventHandler[Interactivity.GetEventType()]()
     end
-    DrawCall()
+    -- 当场景索引到达场景列表尾部时则游戏退出
+    if indexScene <= #sceneList then
+        local _scene = sceneList[indexScene]
+        -- 检查当前场景是否加载
+        if not _scene.module then
+            _scene.module = require(_scene.name)
+        end
+        -- 检查当前场景是否初始化
+        if not _scene.isInitialized then
+            _scene.module.Init()
+            _scene.isInitialized = true
+        end
+        -- 当场景的 Update 函数返回 false 时表示当前场景结束
+        if not _scene.module.Update() then
+            -- 检查当前场景是否需要强制卸载
+            if _scene.isForcedUnload then
+                _scene.module = nil
+                package.loaded[_scene.name] = nil
+                _scene.isInitialized = false
+            end
+            -- 场景列表索引递增
+            indexScene = indexScene + 1
+        end
+    else
+        isQuit = true
+    end
     Window.UpdateWindow()
-    Time.DynamicSleep(1000 / _FPS_, Time.GetInitTime() - _timeFrameStart)
+    Time.DynamicSleep(1000 / GlobalSettings._FPS_, Time.GetInitTime() - _timeFrameStart)
 end

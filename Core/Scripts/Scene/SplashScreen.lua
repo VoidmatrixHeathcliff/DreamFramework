@@ -1,3 +1,5 @@
+GlobalSettings = require("GlobalSettings")
+
 Window = UsingModule("Window")
 Graphic = UsingModule("Graphic")
 Time = UsingModule("Time")
@@ -22,8 +24,13 @@ local _rectNote = {x = 0, y = 0, w = _widthImageNote, h = 0}
 -- PoweredBy 信息裁剪矩形
 local _rectNoteCut = {x = 0, y = _heightImageNote, w = _widthImageNote, h = _heightImageNote}
 
-local _colorBackground = {r = 245, g = 245, b = 245, a = 255}
-local _colorMask = {r = 25, g = 25, b = 25, a = 255}
+local _colorBackground = GlobalSettings._COLOR_.WHITE_SOFT
+local _colorMask = {
+    r = GlobalSettings._COLOR_.BLACK_SOFT.r,
+    g = GlobalSettings._COLOR_.BLACK_SOFT.g,
+    b = GlobalSettings._COLOR_.BLACK_SOFT.b,
+    a = 255
+}
 
 -- 动画状态机
 local _stateMachineAnimation = {
@@ -77,7 +84,11 @@ local _stateMachineAnimation = {
         isPlayOver = false,
         timeStart = 0,
         Play = function(self)
-            _colorMask.a = Algorithm.Clamp(_colorMask.a + (Time.GetInitTime() - self.timeStart) / 300, 0, 255)
+            _colorMask.a = Algorithm.Clamp(
+                _colorMask.a + (Time.GetInitTime() - self.timeStart) / 300,
+                0,
+                255
+            )
             if _colorMask.a == 255 then
                 self.isPlayOver = true
             end
@@ -91,14 +102,14 @@ local _indexSMA = 1
 -- 计算渲染相关内容
 local function _CalculateRender()
     _rectWindowContent.w, _rectWindowContent.h = Window.GetWindowDrawableSize()
-    local _scalingWidth = _rectWindowContent.w / 1920
-    _rectLogo.w = _widthImageLogo * _scalingWidth
-    _rectLogo.h = _heightImageLogo * _scalingWidth
-    _rectTitle.w = _widthImageTitle * _scalingWidth
-    _rectTitle.h = _heightImagTitle * _scalingWidth
-    _rectLogo.x = (980 - (_widthImageLogo + _widthImageTitle + 100) / 2) * _scalingWidth
+    local _scaling = math.min(_rectWindowContent.w / 1920, _rectWindowContent.h / 1080)
+    _rectLogo.w = _widthImageLogo * _scaling
+    _rectLogo.h = _heightImageLogo * _scaling
+    _rectTitle.w = _widthImageTitle * _scaling
+    _rectTitle.h = _heightImagTitle * _scaling
+    _rectLogo.x = 980 * _scaling - (_rectLogo.w + _rectTitle.w + 100 * _scaling) / 2
     _rectLogo.y = _rectWindowContent.h / 2 - _rectLogo.h / 2
-    _rectTitle.x = _rectLogo.x + (_widthImageLogo + 100) * _scalingWidth
+    _rectTitle.x = _rectLogo.x + _rectLogo.w + 100 * _scaling
     _rectTitle.y = _rectWindowContent.h / 2 - _rectTitle.h / 2
     _rectNote.x = _rectWindowContent.w / 2 - _rectNote.w / 2
     _rectNote.y = _rectWindowContent.h - _rectNote.h - 15
@@ -123,9 +134,9 @@ _module.Init = function()
 end
 
 _module.Update = function()
+    _CalculateRender()
     Graphic.SetDrawColor(_colorBackground)
     Graphic.DrawFillRectangle(_rectWindowContent)
-    _CalculateRender()
     Graphic.CopyTexture(_textureLogo, _rectLogo)
     Graphic.CopyTexture(_textureTitle, _rectTitle)
     Graphic.CopyReshapeTexture(_textureNote, _rectNoteCut, _rectNote)

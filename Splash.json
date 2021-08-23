@@ -1,0 +1,12 @@
+[
+    {
+        "Background": "Black",
+        "Image": "plane.png",
+        "Delay": 2000
+    },
+    {
+        "Background": "White",
+        "Image": "watrop.png",
+        "Delay": 1000
+    }
+]
