@@ -1,7 +1,7 @@
 local _module = {}
 
 -- 帧率
-_module._FPS_ = 60
+_module._FPS_ = 144
 
 -- 内置调色板
 _module._COLOR_ = {

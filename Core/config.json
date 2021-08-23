@@ -2,7 +2,7 @@
     "entry": "DreamFramework.lua",
     "package": {
         "path": [
-           "scripts/?.lua"
+           "Scripts/?.lua"
         ],
         "cpath": [
 

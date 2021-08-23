@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/VoidmatrixHeathcliff/Dream.svg?style=flat&label=license&message=notspecified&labelColor=3f48cc)](https://github.com/VoidmatrixHeathcliff/Dream/blob/main/LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/VoidmatrixHeathcliff/Dream)](https://github.com/VoidmatrixHeathcliff/Dream/graphs/contributors)
 
-![DreamFramework](docs/img/title.jpg)
+![DreamFramework](docs/img/title.png)
 
 ### DreamFramework 是基于 [EtherEngine](https://github.com/VoidmatrixHeathcliff/EtherEngine) 搭建的视觉小说类游戏开发框架，优势如下：
 
