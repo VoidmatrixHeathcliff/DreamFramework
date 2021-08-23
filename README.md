@@ -1,7 +1,7 @@
 # DreamFramework - 高效强大的 Lua 视觉小说游戏框架
 [![Stars](https://img.shields.io/github/stars/VoidmatrixHeathcliff/Dream.svg?style=flat&labelColor=e49e61)](https://github.com/VoidmatrixHeathcliff/Dream/stargazers)
 [![Forks](https://img.shields.io/github/forks/VoidmatrixHeathcliff/Dream.svg?style=flat&labelColor=e49e61)](https://github.com/VoidmatrixHeathcliff/Dream/network/members)
-[![Platform](https://img.shields.io/badge/platform-Window%20%7C%20Mac%20%7C%20Linux%20%7C%20Android%20%7C%20Web-%23989898)](https://en.wikipedia.org/wiki/Cross-platform_software)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Mac%20%7C%20Linux%20%7C%20Android%20%7C%20Web-%23989898)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![License](https://img.shields.io/github/license/VoidmatrixHeathcliff/Dream.svg?style=flat&label=license&message=notspecified&labelColor=3f48cc)](https://github.com/VoidmatrixHeathcliff/Dream/blob/main/LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/VoidmatrixHeathcliff/Dream)](https://github.com/VoidmatrixHeathcliff/Dream/graphs/contributors)
 
