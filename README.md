@@ -29,7 +29,7 @@
 
 ## 特别鸣谢
 
-> 可能会有
++ 感谢 [许兴逸](https://github.com/Seng-Jik) 老师在 DreamScript 设计中宝贵的建议
 
 ## 佳作展示
 
