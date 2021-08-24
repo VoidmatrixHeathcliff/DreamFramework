@@ -1,12 +1,12 @@
 [
     {
-        "Background": "Black",
-        "Image": "plane.png",
+        "Background": "White",
+        "Image": "zi_hun_ning_chuang.png",
         "Delay": 2000
     },
     {
         "Background": "White",
-        "Image": "watrop.png",
+        "Image": "tian_xue.png",
         "Delay": 1000
     }
 ]

@@ -13,8 +13,8 @@ Window.CreateWindow(
         w = 1280,
         h = 720
     },
-    {}
-    -- {Window.WINDOW_FULLSCREEN_DESKTOP}
+    -- {}
+    {Window.WINDOW_FULLSCREEN_DESKTOP}
 )
 
 Graphic.SetCursorShow(false)
