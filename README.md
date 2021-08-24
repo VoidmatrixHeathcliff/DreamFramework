@@ -25,7 +25,7 @@
 
 ## 文档教程
 
-关于 DreamScript 的设计文档，见 [此处](doc/DreamScript_doc.md)
+关于 DreamScript 的设计文档，见 [此处](docs/DreamScript_doc.md)
 
 ## 特别鸣谢
 
