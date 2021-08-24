@@ -16,7 +16,7 @@
 + ***轻巧高效*** - 框架核心使用 C++ 编写，体积小巧且无臃肿依赖，性能至上
 + ***扩展性强*** - 基于 [EtherEngine](https://github.com/VoidmatrixHeathcliff/EtherEngine) 开发，无论是 Lua 还是 C++ 模块都可以轻松兼容
 + ***职责明确*** - 程序、编剧、导演等各司其职，借助可视化工具生成 DreamScript，提高团队效率
-+ ***超多平台*** - 支持包括 Windows / Mac / Android 等超多平台，一次开发，处处运行
++ ***超多平台*** - 支持包括 Windows / Mac / Android 等多个平台，一次开发，处处运行
 + ***未来可期*** - 兼容新一代 Galgame 标准 [Uni-Gal](https://github.com/Uni-Gal) ，方便在不同开发工具间快速导入导出
 
 ## 演出示例
@@ -25,7 +25,7 @@
 
 ## 文档教程
 
-关于 DreamScript 的设计文档，见 [此处](doc/DreamScript_doc.md)
+关于 DreamScript 的设计文档，见 [此处](docs/DreamScript_doc.md)
 
 ## 特别鸣谢
 
