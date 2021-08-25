@@ -27,6 +27,8 @@
 
 关于 DreamScript 的设计文档，见 [此处](docs/DreamScript_doc.md)
 
+关于 DreamScript 的预实现文档，见 [此处](docs/DreamScript_pre_doc.md)
+
 ## 特别鸣谢
 
 + 感谢 [许兴逸](https://github.com/Seng-Jik) 老师在 DreamScript 设计中宝贵的建议
