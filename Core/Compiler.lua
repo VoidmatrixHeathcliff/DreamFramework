@@ -188,34 +188,34 @@ Rules = {
     end,
     -- 匹配多行注释结束标志
     ["^(.*}%%(.*))$"] = function(args)
-        -- 如果结束标志后方仍有其他内容，则输出警告
-        if #args[4] ~= 0 then
-            OutputWarning("content behind the end flag will be discarded")
-        end
-        -- 如果当前为多行指令，则解析当前行语法
-        if compilerStatus == CompilerStatusList.MULTILINE_NOTES then
-            -- 检查结束标志是否和开始标志匹配
-            if (MultilineCMDNodeTemp.type == COMMAND_BINDING and args[3] == "@")
-                or (MultilineCMDNodeTemp.type == COMMAND_INDEPEND and args[3] == "$")
-            then
-                -- 将结束标志前方指令添加至多行文本容器中
-                table.insert(MultilineCMDNodeTemp.command, args[2])
-                -- 将指令列表拼接为字符串
-                MultilineCMDNodeTemp.command = table.concat(MultilineCMDNodeTemp.command, " ")
-                -- 将多行指令节点临时对象添加到节点列表中
-                table.insert(NodeList, MultilineCMDNodeTemp)
-                -- 重置多行指令节点临时对象
-                MultilineCMDNodeTemp = {command = {}}
-            -- 否则输出语法错误
-            else
-                OutputSyntaxError("start and end flags do not match")
-            end
-            -- 将结束标志前方指令添加至多行文本容器中
-            table.insert(MultilineCMDNodeTemp.command, args[2])
-        -- 否则如果当前行为单行状态，则缺失了开始标志，输出语法错误
-        elseif compilerStatus == CompilerStatusList.MULTILINE_CMDS then
-            OutputSyntaxError("missing multiline command start flag")
-        end
+        -- -- 如果结束标志后方仍有其他内容，则输出警告
+        -- if #args[4] ~= 0 then
+        --     OutputWarning("content behind the end flag will be discarded")
+        -- end
+        -- -- 如果当前为多行指令，则解析当前行语法
+        -- if compilerStatus == CompilerStatusList.MULTILINE_NOTES then
+        --     -- 检查结束标志是否和开始标志匹配
+        --     if (MultilineCMDNodeTemp.type == COMMAND_BINDING and args[3] == "@")
+        --         or (MultilineCMDNodeTemp.type == COMMAND_INDEPEND and args[3] == "$")
+        --     then
+        --         -- 将结束标志前方指令添加至多行文本容器中
+        --         table.insert(MultilineCMDNodeTemp.command, args[2])
+        --         -- 将指令列表拼接为字符串
+        --         MultilineCMDNodeTemp.command = table.concat(MultilineCMDNodeTemp.command, " ")
+        --         -- 将多行指令节点临时对象添加到节点列表中
+        --         table.insert(NodeList, MultilineCMDNodeTemp)
+        --         -- 重置多行指令节点临时对象
+        --         MultilineCMDNodeTemp = {command = {}}
+        --     -- 否则输出语法错误
+        --     else
+        --         OutputSyntaxError("start and end flags do not match")
+        --     end
+        --     -- 将结束标志前方指令添加至多行文本容器中
+        --     table.insert(MultilineCMDNodeTemp.command, args[2])
+        -- -- 否则如果当前行为单行状态，则缺失了开始标志，输出语法错误
+        -- elseif compilerStatus == CompilerStatusList.MULTILINE_CMDS then
+        --     OutputSyntaxError("missing multiline command start flag")
+        -- end
     end,
     -- 匹配标签语句
     ["^(%s*#%s*(.-)%s*)$"] = function(args)
