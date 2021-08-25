@@ -114,7 +114,7 @@
 
 + 最关键的部分便是把 `指令` 和 `代码块` 概念统一起来了，DS 将不会处理解析为 Lua 代码的部分，而是将解析完成的内容直接交付给 Lua 虚拟机执行，DS 所做的仅仅是选择合适的时机进行这一部分代码的执行
 
-+ 关于命名空间，DS 会加载 `Command` 目录下的所有以 `.lua` 为扩展名的脚本文件，并将其放在对应文件名的包中，如：`Command/MyCommand.lua` 将会被加载到全局中名为 `MyCommand` 的表中（我们希望 Command 模块返回值是一个 table），即默认执行类似 `MyCommand = require("Command.MyCommand")` 的语句，所以，请确保您的文件名中不会出现在 Lua 语法中变量命名的非法字符（如：`-`、`.`等等）
++ 关于命名空间，DS 会加载 `Command` 目录下的所有以 `.lua` 为扩展名的脚本文件，并将其放在对应文件名的包中，如：`Command/MyCommand.lua` 将会被加载到全局中名为 `MyCommand` 的表中（我们希望 Command 模块返回值是一个 table），即默认执行类似 `MyCommand = require("Command.MyCommand")` 的语句，所以，请确保您的文件名中不会出现空格或在 Lua 语法中变量命名的非法字符（如：`-`、`.`等等）
 
 + 移除了 `RegisterToGloable` 函数，这意味着所有的自定义指令模块都需要以 `模块名.函数名()` 的方式进行调用，全局命名空间中仅存在 DS 内置的 API
 
