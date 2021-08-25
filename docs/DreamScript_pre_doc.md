@@ -108,6 +108,7 @@
 
 # dream_start 2
 @JumpToLabel("dream_start 1")
+* 继续做梦……
 ```
 
 ## 修改内容
