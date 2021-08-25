@@ -1,0 +1,31 @@
+%{
+    这是一段 DreamScript 的测试脚本
+    这将标志着 DreamScript 这门 AVG 脚本语言真正诞生
+}%
+
+@ Scene.Set("Main")
+小%*%*明 * 爷就是要在名字里面带星号
+小明 * 这是剧本的第一句话
+老八 * 你 %*%*%* 了，我才是新时代知名人物
+老八 * 熟悉你名字的人现在关注的是我
+
+@{
+    Music.Set("sad.mp3")
+    Music.SetVolumn(75)
+}@
+%% 后续根据情况调节音乐音量
+小明 * 所以爱会消失对吗
+${
+    SetChoice("是的", fucntion() JumpToLabel("yes") end)
+    SetChoice("不是的", fucntion() JumpToLabel("no") end)
+}$
+
+# yes
+老八 * 是的，你就是被时代淘汰的人
+
+$ MySave.SaveGame(1)
+
+# no
+老八 * 当然不是，快和我来一起做吃播
+
+$ MySave.SaveGame(2)

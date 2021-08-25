@@ -1,5 +1,5 @@
 {
-    "entry": "DreamFramework.lua",
+    "entry": "Compiler.lua",
     "package": {
         "path": [
            "Scripts/?.lua"
