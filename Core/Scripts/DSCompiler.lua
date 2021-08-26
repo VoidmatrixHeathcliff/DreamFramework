@@ -162,7 +162,7 @@ local _RULES_ = {
                     -- 将结束标志前方指令添加至多行文本容器中
                     table.insert(tempNodeMultilineCMD.command, args[2])
                     -- 将指令列表拼接为字符串
-                    tempNodeMultilineCMD.command = table.concat(tempNodeMultilineCMD.command, " ")
+                    tempNodeMultilineCMD.command = table.concat(tempNodeMultilineCMD.command, "\n")
                     -- 尝试编译 Lua 语句
                     local _result, _error = load(tempNodeMultilineCMD.command)
                     -- 如果编译成功则继续解析

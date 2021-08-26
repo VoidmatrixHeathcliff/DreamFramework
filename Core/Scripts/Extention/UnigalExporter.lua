@@ -30,13 +30,14 @@ _module.Export = function(src, dst)
 
     local _document = XML.CreateEmpty()
 
-    local _node_head = _document:AppendChild("head")
-    local _node_body = _document:AppendChild("body")
+    local _root = _document:AppendChild("unigal-script")
+    local _node_head = _root:AppendChild("head")
+    local _node_body = _root:AppendChild("body")
 
     local _node_src_engine = _node_head:AppendChild("src_engine")
     _node_src_engine:SetText("DreamFramework - EntherEngine")
 
-    for _, node in ipairs() do
+    for _, node in ipairs(_result_compile) do
         -- 处理对话语句
         if node.type == DSCompilerConfig.NodeType.DIALOGUE then
             local _node_text = _node_body:AppendChild("text")

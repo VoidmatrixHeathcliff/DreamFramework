@@ -5,6 +5,15 @@ Graphic = UsingModule("Graphic")
 Interactivity = UsingModule("Interactivity")
 Time = UsingModule("Time")
 
+-- DSCompiler = UsingModule("DSCompiler")
+-- result = DSCompiler.CompileFile("../Scripts/Test.ds")
+-- JSON = UsingModule("JSON")
+-- JSON.DumpJSONToFile(result, "../Scripts/Test.json")
+UnigalExporter = UsingModule("Extention.UnigalExporter")
+UnigalExporter.Export("../Scripts/Test.ds", "../Scripts/Test.xml")
+
+os.exit()
+
 Window.CreateWindow(
     "DreamFramework Dev_0.0.1",
     {
