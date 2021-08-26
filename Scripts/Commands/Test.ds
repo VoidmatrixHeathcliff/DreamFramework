@@ -16,8 +16,8 @@
 %% 后续根据情况调节音乐音量
 小明 * 所以爱会消失对吗
 ${
-    SetChoice("是的", fucntion() JumpToLabel("yes") end)
-    SetChoice("不是的", fucntion() JumpToLabel("no") end)
+    SetChoice("是的", function() JumpToLabel("yes") end)
+    SetChoice("不是的", function() JumpToLabel("no") end)
 }$
 
 # yes
