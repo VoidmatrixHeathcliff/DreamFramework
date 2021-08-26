@@ -301,8 +301,8 @@ _module.CompileFile = function(path)
                     break
                 end
             end
+            -- 如果没有找到对应的规则，则检查当前状态
             if not _isFoundRule then
-                -- 如果没有找到对应的规则，则检查当前状态
                 -- 如果当前状态为多行指令，则将当前行原始内容添加至多行文本容器中
                 if _compilerStatus == _CompilerStatusList.MULTILINE_COMMAND then
                     table.insert(tempNodeMultilineCMD.command, _str_line)
