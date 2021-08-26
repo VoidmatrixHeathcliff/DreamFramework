@@ -1,10 +1,12 @@
-_module = {}
-
 --[[
     DreamScript 脚本编译器
     + CompileFile(path)：编译指定路径的脚本文件
     + _PrintCompileResult(node_list)：打印编译结果（仅调试使用）
 --]]
+
+DSCompilerConfig = UsingModule("DSCompilerConfig")
+
+_module = {}
 
 -- 当前正在编译的脚本文件名
 local _fileName = nil
@@ -23,12 +25,7 @@ local _OutputWarning = function(msg, line)
 end
 
 -- 节点类型
-local _NodeType = {
-    DIALOGUE = 1,           -- 对话语句
-    COMMAND_BINDING = 2,    -- 绑定指令
-    COMMAND_INDEPEND = 3,   -- 独立指令
-    LABEL = 4               -- 标签语句
-}
+local _NodeType = DSCompilerConfig.NodeType
 
 -- 编译器状态列表
 local _CompilerStatusList = {
@@ -245,12 +242,18 @@ local _RULES_ = {
         handler = function(args)
             -- 如果当前为单行状态，则解析当前行语法
             if _compilerStatus == _CompilerStatusList.SINGLELINE then
-                table.insert(_NodeList, {
-                    file = _fileName,
-                    line = _lineNumber,
-                    type = _NodeType.LABEL,
-                    name = args[2]
-                })
+                -- 检查标签名是否为空
+                if #args[2] ~= 0 then
+                    table.insert(_NodeList, {
+                        file = _fileName,
+                        line = _lineNumber,
+                        type = _NodeType.LABEL,
+                        name = args[2]
+                    })
+                -- 为空则输出语法错误
+                else
+                    _OutputSyntaxError("label name cannot be empty")
+                end
             -- 如果当前为多行指令，则将当前行原始内容添加至多行文本容器中
             elseif _compilerStatus == _CompilerStatusList.MULTILINE_COMMAND then
                 table.insert(tempNodeMultilineCMD.command, args[1])
