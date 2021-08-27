@@ -9,10 +9,10 @@ Time = UsingModule("Time")
 -- result = DSCompiler.CompileFile("../Scripts/Test.ds")
 -- JSON = UsingModule("JSON")
 -- JSON.DumpJSONToFile(result, "../Scripts/Test.json")
-UnigalExporter = UsingModule("Extention.UnigalExporter")
-UnigalExporter.Export("../Scripts/Test.ds", "../Scripts/Test.xml")
+-- UnigalExporter = UsingModule("Extentions.UnigalExporter")
+-- UnigalExporter.Export("../Scripts/Test.ds", "../Scripts/Test.xml")
 
-os.exit()
+-- os.exit()
 
 Window.CreateWindow(
     "DreamFramework Dev_0.0.1",
@@ -31,13 +31,13 @@ Graphic.SetCursorShow(false)
 -- 场景列表
 sceneList = {
     {
-        name = "Scene.SplashScreen",
+        name = "Scenes.SplashScreen",
         module = nil,
         isInitialized = false,
         isForcedUnload = true
     },
     {
-        name = "Scene.CustomSplashScreen",
+        name = "Scenes.CustomSplashScreen",
         module = nil,
         isInitialized = false,
         isForcedUnload = true

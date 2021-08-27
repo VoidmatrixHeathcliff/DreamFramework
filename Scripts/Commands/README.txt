@@ -1,7 +1,7 @@
 + 此文件夹中存放开发者自定义指令脚本
 + 脚本即 Lua 模块，语法和加载方式均遵循 Lua 标准
 + 脚本文件名中请不要出现在 Lua 语法中不支持的字符
-+ 例如：名为 MyCmd.lua 中有如下内容：
++ 例如：名为 MyCmd.lua 的文件中有如下内容：
 
 return {
     MyFun = function(content)
