@@ -9,6 +9,8 @@
 
 **DreamFramework 是基于 [EtherEngine](https://github.com/VoidmatrixHeathcliff/EtherEngine) 搭建的 AVG 类游戏开发框架**
 
+> 正在开发阶段，功能尚不完善，请勿用于实际生产环境
+
 ## 特点
 
 + ***信手拈来*** - 像写小说一样编写演出脚本，将你的灵感快速转化为生产力
